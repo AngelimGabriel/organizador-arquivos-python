@@ -2,6 +2,28 @@ import os
 import shutil
 from tkinter import filedialog
 
+# Função para selecionar as pastas de origem e destino
+def selecionarPastas():
+    while True:
+        print('\nSelecione a pasta de origem')
+        path_folder_src = filedialog.askdirectory(title='Selecione a pasta de origem')
+        print('Selecione a pasta de destino')
+        path_folder_dst = filedialog.askdirectory(title='Selecione a pasta de destino')
+
+        if not path_folder_src and not path_folder_dst:
+            print('Operação cancelada.')
+            return None, None
+        
+        print('\nAs novas pastas selecionadas são: ')
+        print(f'Pasta origem: {path_folder_src}')
+        print(f'Pasta destino: {path_folder_dst}')
+        
+        if solicitarConfirmacao('\nConfirma essa escolha?') == 's':
+            return path_folder_src, path_folder_dst
+
+        if solicitarConfirmacao('Deseja escolher novamente? caso não deseje, a aplicação irá fechar') == 'n':
+            return None, None
+# Função para confimar algumas opções de acordo com as escolhas do usuario
 def solicitarConfirmacao(textoMsg):
     while True:
         result = input(f'{textoMsg} [S] [N]: ').strip().lower()
@@ -21,7 +43,7 @@ def organizarArquivos(pathFolderSrc, pathFolderDst):
     
     if len(foldersCreate) == 0:
         print("Não existe arquivo para ser movido na pasta origem.")
-        print("Fechando aplicação...")
+        print("Fechando aplicação...\n")
         exit()
 
     for folderCreate in foldersCreate:
@@ -47,7 +69,7 @@ def moverArquivos(pathFolderSrc, pathFolderDst):
         shutil.move(path_old,path_new)
     
     print("Todos os arquivos foram movidos com sucesso!")
-
+# Função principal
 def main():
     result = solicitarConfirmacao('Você deseja iniciar o processo de organização?')
     if result == 'n':
@@ -61,29 +83,14 @@ def main():
     print(f'A pasta padrão de destino é: {path_folder_dst}\n')
 
     result = solicitarConfirmacao('Deseja mudar as pastas?')
-    while True:
-        if result == 's':
-            print('\nSelecione a pasta de origem')
-            path_folder_src = filedialog.askdirectory(title='Selecione a pasta de origem')
-            print('Selecione a pasta de destino')
-            path_folder_dst = filedialog.askdirectory(title='Selecione a pasta de destino')
-            print('\nAs novas pastas selecionadas são: ')
-            print(f'Pasta origem: {path_folder_src}')
-            print(f'Pasta destino: {path_folder_dst}')
-
-            result_2 = solicitarConfirmacao('\nConfirma essa escolha?')
-            if result_2 == 'n':
-                result_2 = solicitarConfirmacao('Deseja escolher novamente? caso não deseje, a aplicação irá fechar')
-                if result_2 == 'n':
-                    print('Fechando aplicação...\n')
-                    return
-                break
-            break
+    if result == 's':
+        path_folder_src, path_folder_dst = selecionarPastas()
+        if not path_folder_src and not path_folder_dst:
+            print('Fechando aplicação...\n')
+            return
+    else:
         if not os.path.exists(path_folder_dst):
             os.mkdir(path_folder_dst)
-            break
-        break
-
     organizarArquivos(path_folder_src,path_folder_dst)
 
 if __name__ == "__main__":
