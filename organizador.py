@@ -1,32 +1,15 @@
 import os
 import shutil
+from tkinter import filedialog
 
-while(True):
-    result = input("Você deseja iniciar o processo de organização? [S] [N]: ")
-    if result.lower() != "s" and result.lower() != "n":
-        print("Opção inválida, tente novamente.\n")
-    else:
-        break
-
-if result.lower() == "n":
-    print("Fechando aplicação...")
-    exit()
-else:
-    print("Iniciando o processo de organização...")
-
-# Caminho onde estão os arquivos a serem organizados
-path_folder_src = os.path.join(os.path.expanduser("~"), "Desktop")
-
-# Caminho onde os arquivos ficaram organizados
-path_folder_dst = os.path.join(path_folder_src, "Pasta Organizada")
-
-# Verifica se o caminho raiz já existe
-if not os.path.exists(path_folder_dst):
-    os.mkdir(path_folder_dst)
-
+def solicitarConfirmacao(textoMsg):
+    while True:
+        result = input(f'{textoMsg} [S] [N]: ').strip().lower()
+        if result in ('s', 'n'):
+            return result
+        print('Opção inválida.\n')
 # Função para criar as pastas e chamar a função que move os arquivos
 def organizarArquivos(pathFolderSrc, pathFolderDst):
-
     foldersCreate = [] # Cria uma lista vazia
     for file_path in os.listdir(pathFolderSrc):
         path_file = os.path.join(pathFolderSrc,file_path)
@@ -46,10 +29,10 @@ def organizarArquivos(pathFolderSrc, pathFolderDst):
         if not os.path.exists(folder_toCreate):
             os.mkdir(folder_toCreate)
     
-    print("As pastas foram criadas na pasta raiz escolhida.")
+    print("As pastas foram criadas na pasta de destino.")
     
     moverArquivos(pathFolderSrc, pathFolderDst)
-
+# Função para mover os arquivos para as pastas
 def moverArquivos(pathFolderSrc, pathFolderDst):
     file_all = [] # Criação da lista onde ficara os itens, path do arquivo e extensão
 
@@ -65,4 +48,43 @@ def moverArquivos(pathFolderSrc, pathFolderDst):
     
     print("Todos os arquivos foram movidos com sucesso!")
 
-organizarArquivos(path_folder_src,path_folder_dst)
+def main():
+    result = solicitarConfirmacao('Você deseja iniciar o processo de organização?')
+    if result == 'n':
+        print('Fechando aplicação...\n')
+        return
+    
+    path_folder_src = os.path.join(os.path.expanduser("~"), "Desktop") # Caminho onde estão os arquivos a serem organizados
+    path_folder_dst = os.path.join(path_folder_src, "Pasta Organizada") # Caminho onde os arquivos ficaram organizados
+
+    print(f'\nA pasta padrão de origem é: {path_folder_src}')
+    print(f'A pasta padrão de destino é: {path_folder_dst}\n')
+
+    result = solicitarConfirmacao('Deseja mudar as pastas?')
+    while True:
+        if result == 's':
+            print('\nSelecione a pasta de origem')
+            path_folder_src = filedialog.askdirectory(title='Selecione a pasta de origem')
+            print('Selecione a pasta de destino')
+            path_folder_dst = filedialog.askdirectory(title='Selecione a pasta de destino')
+            print('\nAs novas pastas selecionadas são: ')
+            print(f'Pasta origem: {path_folder_src}')
+            print(f'Pasta destino: {path_folder_dst}')
+
+            result_2 = solicitarConfirmacao('\nConfirma essa escolha?')
+            if result_2 == 'n':
+                result_2 = solicitarConfirmacao('Deseja escolher novamente? caso não deseje, a aplicação irá fechar')
+                if result_2 == 'n':
+                    print('Fechando aplicação...\n')
+                    return
+                break
+            break
+        if not os.path.exists(path_folder_dst):
+            os.mkdir(path_folder_dst)
+            break
+        break
+
+    organizarArquivos(path_folder_src,path_folder_dst)
+
+if __name__ == "__main__":
+    main()
