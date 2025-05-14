@@ -14,7 +14,7 @@ This is a simple Python script that automatically organizes files on your deskto
 ## How to Run  
 
 1. Clone this repository or copy the `organizador.py` script to your computer:  
-   git clone https://github.com/AngelimGabriel/organizador-arquivos-python/
+   git clone https://github.com/AngelimGabriel/python-file-organizer/
 
 ========================== PORTUGUÊS ==========================
 
@@ -33,4 +33,4 @@ Este é um script simples em Python que organiza automaticamente os arquivo da �
 ## Como Executar
 
 1. Clone este repositório ou copio o script "organizador.py" para seu computador:
-   git clone https://github.com/AngelimGabriel/organizador-arquivos-python/
+   git clone https://github.com/AngelimGabriel/python-file-organizer/
