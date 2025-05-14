@@ -1,36 +1,23 @@
-========================== ENGLISH ==========================
-# File Organizer by Extension - DESKTOP  
+# Python File Organizer
 
-This is a simple Python script that automatically organizes files on your desktop by their extension into a root folder called 'Pasta Organizada', which will be created on your desktop.  
+A simple Python script that automatically organizes files on your Desktop by file extension into a main folder named **"Pasta Organizada"**.
 
-## Features  
+---
 
-- Before starting the organization, it asks for confirmation to proceed.  
-- Automatically creates folders based on file extensions.  
-- Moves files from the desktop to the 'Pasta Organizada', sorted by file type.  
-- Ignores directories and organizes only files.  
-- Displays simple informative messages during execution.  
+## 📁 Features
 
-## How to Run  
+- Asks for confirmation before organizing.
+- Automatically creates folders based on file extensions.
+- Moves files from the Desktop to the "Pasta Organizada", grouped by file type.
+- Ignores directories, organizing only files.
+- Displays simple informative messages during execution.
 
-1. Clone this repository or copy the `organizador.py` script to your computer:  
-   git clone https://github.com/AngelimGabriel/python-file-organizer/
+---
 
-========================== PORTUGUÊS ==========================
+## ▶️ How to Run
 
-# Organizador de arquivos por Extensão - DESKTOP
+1. Clone this repository or copy the `organizador.py` script to your computer:
 
-Este é um script simples em Python que organiza automaticamente os arquivo da área de trabalho - pela sua extensão - para uma pasta raiz chamada "Pasta Organizada" que ficará na área de trabalho
-
-## Funcionalidades
-
-- Antes de iniciar a organização uma validação se quer realmente iniciar o processo.
-- Cria pastas automaticamente com base nas extensões dos arquivos.
-- Move os arquivos da área de trabalho para a pasta "Pasta Organizada", categorizada por tipo.
-- Ignora diretórios e organiza apenas arquivos.
-- Exbie mensagens informativas simples durante a execução.
-
-## Como Executar
-
-1. Clone este repositório ou copio o script "organizador.py" para seu computador:
-   git clone https://github.com/AngelimGabriel/python-file-organizer/
+git clone https://github.com/AngelimGabriel/python-file-organizer
+cd python-file-organizer
+python organizador.py
